@@ -1,18 +1,21 @@
 import BillAmount from './Components/BillAmount';
 import ServiceLvl from './Components/ServiceLvl';
-import Display from './Components/Display';
 import Button from './Components/Button';
+import Display from './Components/Display';
 
 
 
 function App() {
-  <div>
-    <BillAmount></BillAmount>
-    <ServiceLvl></ServiceLvl>
-    <ServiceLvl></ServiceLvl>
-    <Display></Display>
-    <Button></Button>
-  </div>
+  return(
+     <div>
+      <BillAmount></BillAmount>
+      <ServiceLvl>How did you like the service?</ServiceLvl>
+      <ServiceLvl>How did your friend like the service</ServiceLvl>
+      <Display></Display>
+      <Button></Button>
+    </div>
+  );
+ 
  }
 
 export default App;
