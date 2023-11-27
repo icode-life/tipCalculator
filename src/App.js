@@ -1,6 +1,6 @@
 import BillAmount from './Components/BillAmount';
 import ServiceLvl from './Components/ServiceLvl';
-import Button from './Components/Button';
+import Reset from './Components/Reset';
 import Display from './Components/Display';
 import { useState } from "react";
 
@@ -17,15 +17,24 @@ function App() {
  }
 
  const TipCalculator = () => {
-    const [tip, setTip] = useState(0);
+    const [bill, setBill] = useState("");
+    const [tips, setTip] = useState([]);
+
+    const addTip = (tip) => {
+      setTip((tip) => [...tips, tip]);
+    };
+
+    /*const changeBill = (bill) => {
+      setBill(Number(bill));
+    };*/
 
   return (
     <div>
-      <BillAmount />
-      <ServiceLvl tip={tip} onSubmit={setTip}>How did you like the service?</ServiceLvl>
-      <ServiceLvl>How did your friend like the service</ServiceLvl>
-      <Display></Display>
-      <Button></Button>
+      <BillAmount bill={bill} onSetBill={setBill}/>
+      <ServiceLvl tip={tips} onChange={addTip}>How did you like the service?</ServiceLvl>
+      <ServiceLvl tip={tips} onChange={addTip}>How did your friend like the service</ServiceLvl>
+      <Display bill={bill}></Display>
+      <Reset></Reset>
     </div>
   )
  }
