@@ -17,24 +17,34 @@ function App() {
  }
 
  const TipCalculator = () => {
+  /**states */
     const [bill, setBill] = useState("");
-    const [tips, setTip] = useState([]);
+    const [tip1, setTip1] = useState(0);
+    const [tip2, setTip2] = useState(0);
 
-    const addTip = (tip) => {
-      setTip((tip) => [...tips, tip]);
-    };
+  /**derived states aka variables */
+    const totalTip = bill * ((tip1 + tip2)/2 /100);
 
-    /*const changeBill = (bill) => {
-      setBill(Number(bill));
-    };*/
+  /**handler for reset button */
+    const clear = () => {
+      setBill("");
+      setTip1(0);
+      setTip2(0);
+    }
 
   return (
     <div>
       <BillAmount bill={bill} onSetBill={setBill}/>
-      <ServiceLvl tip={tips} onChange={addTip}>How did you like the service?</ServiceLvl>
-      <ServiceLvl tip={tips} onChange={addTip}>How did your friend like the service</ServiceLvl>
-      <Display bill={bill}></Display>
-      <Reset></Reset>
+      <ServiceLvl tip={tip1} onSelect={setTip1}>How did you like the service?</ServiceLvl>
+      <ServiceLvl tip={tip2} onSelect={setTip2}>How did your friend like the service</ServiceLvl>
+      {/**on affiche le résultat que s'il y a une addition */}
+      {bill > 0 && (
+        <>
+          <Display bill={bill} totalTip={totalTip}></Display>
+          <Reset onReset={clear}>Reset</Reset>
+        </>
+      )}
+      
     </div>
   )
  }
